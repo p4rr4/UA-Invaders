@@ -101,7 +101,6 @@ int main()
 void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int windowX=1200;//X de la ventana
 	int windowY=900;//Y de la ventana
-	char input;//entrada de teclado
 	int x=20;//esquina inicial de los enemigos
 	int y=20;//esquina inicial de los enemigos
 	int sep=24;//separacion entre enemigos
