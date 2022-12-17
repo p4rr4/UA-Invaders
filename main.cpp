@@ -91,11 +91,9 @@ int main()
 	cout << "\n\n\t\t\t\t\t\t\u001b[34mEɳƚҽɾ ყσυɾ ɳαɱҽ (3 ʅҽƚƚҽɾʂ): ";
 	cin >> name;
 	mainMenu(option, instr);
-
-	do {
-		menuJugar(option, instr,jugador,cantE,win,b,input);
-	}while (instr==1 && input != 'q');
-
+	
+	menuJugar(option, instr,jugador,cantE,win,b,input);
+	
 	return 0;
 }
 void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
