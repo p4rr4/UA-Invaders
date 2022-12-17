@@ -46,6 +46,7 @@ void DibEne2(int x, int y, int alto, int pixDim);
 void DibEne3(int x, int y, int alto, int pixDim);
 void DibEne4(int x, int y, int alto, int pixDim);
 void dibExp(int x, int y, int alto, int pixDim);
+void DibEne3_1(int x, int y, int alto, int pixDim);
 
 void DibP(int x, int y,int alto, int pixDim, int &hitJ, DatosJugador jugador);
 char DetInput(char input);
@@ -70,7 +71,11 @@ void animMatriz(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],
 
 void stats(DatosJugador jugador,int cantE, bool win, int b);
 
+// Levels
 void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+/*void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+*/
 
 int main()
 {
@@ -96,13 +101,15 @@ int main()
 	
 	return 0;
 }
+
 void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=24;//separacion entre enemigos
-	const int F=4;//filas matriz enemigos
+	int windowX=1200;//X of the window
+	int windowY=900;//Y of the window
+	int x=70;//initial x of enemies
+	int y=20;//initial y of enemies
+	int sep=24;//separation between enemies
+	void killing(int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne);
+const int F=8;//filas matriz enemigos
 	const int C=10;//columnas matriz enemigos
 	int dist=10;//distancia de cada movimiento
 	int pixDim=4;//dimension de los píxeles
@@ -111,7 +118,7 @@ void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
 	int t=300000;//tiempo
 	int ticksBala=75;
-	int balasEnemigas1=200;
+	int balasEnemigas1=250;
 	int balasEnemigas4=400;
 	int velBalas=3;
 	int lost=0;
@@ -128,7 +135,7 @@ void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=1;
-	jugador.vida=10;
+	jugador.vida=3;
 
 	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
 	int xd=x;//x de dibujado
@@ -138,15 +145,142 @@ void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 
 
 	int enemigos [F][C]=
-	{{2,2,3,0,3,3,0,3,2,2},
-	{4,3,2,1,0,0,1,2,3,4},
-	{2,1,3,2,3,3,2,3,1,2},
-	{2,0,0,1,4,4,1,0,0,2}};
+	{{0,0,0,0,0,0,0,0,0,0},
+	{0,1,2,2,1,0,0,1,2,0},
+	{0,2,0,0,2,0,1,0,2,0},
+	{0,2,0,0,2,0,0,0,2,0},
+	{0,2,2,2,2,0,0,0,2,0},
+	{0,2,0,0,0,0,0,0,2,0},
+	{0,2,0,0,0,0,0,2,2,1},
+	{0,0,0,0,0,0,0,0,0,0}};
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
+
+void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int windowX=1200;//X of the window
+	int windowY=900;//Y of the window
+	int x=20;//initial x of enemies
+	int y=20;//initial y of enemies
+	int sep=10;//separation between enemies
+	const int F=8;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=28;//distancia de cada movimiento
+	int pixDim=4;//dimension de los píxeles
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=75;
+	int balasEnemigas1=100;
+	int balasEnemigas4=400;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=1;
+	jugador.vida=3;
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+
+	int enemigos [F][C]=
+	{{1,0,2,2,2,0,1,0,1,1},
+	{0,0,2,2,2,0,0,0,0,0},
+	{0,0,2,2,2,0,0,0,0,0},
+	{0,0,0,2,0,2,0,0,0,0},
+	{0,0,2,2,2,0,0,0,0,0},
+	{0,2,0,2,0,0,0,0,0,0},
+	{0,0,2,2,2,0,3,3,0,0},
+	{0,0,0,0,2,0,3,3,0,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+
+void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int windowX=1200;//X of the window
+	int windowY=900;//Y of the window
+	int x=220;//initial x of enemies
+	int y=20;//initial y of enemies
+	int sep=0;//separation between enemies
+	const int F=15;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=5;//distancia de cada movimiento
+	int pixDim=4;//dimension de los píxeles
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=75;
+	int balasEnemigas1=100;
+	int balasEnemigas4=400;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=1;
+	jugador.vida=3;
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+
+	int enemigos [F][C]=
+	{{4,0,0,1,0,1,0,0,0,4},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,2,0,2,0,0,2,0,2,0},
+	{0,0,2,0,0,0,0,2,0,0},
+	{0,0,0,2,0,0,2,0,0,0},
+	{4,0,2,0,3,3,0,2,0,4},
+	{0,0,0,3,3,3,3,0,0,0},
+	{0,0,3,3,3,3,3,3,0,0},
+	{0,0,0,3,3,3,3,0,0,0},
+	{0,0,0,0,3,3,0,0,0,0},
+	{0,4,0,0,0,0,0,0,4,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+
+
+
+
 int lastE(int enemigos[][10],int f, int c){
 
 	int ene=0;
@@ -517,6 +651,13 @@ void matriz(int x0, int y0,int ancho, int alto, int sep,int enemigos [][10],int 
 					DibEne4(x0+j*(ancho+sep), y0+i*(alto+sep),alto, pixDim);
 					DefEne((x0+j*(ancho+sep))+1*pixDim, (y0+i*(alto+sep))+3*pixDim, (17*pixDim)-1, (8*pixDim)-1,i,j,e, enemigo);
 				}
+
+				if (enemigos [i][j]==5)
+				{
+					DibEne3_1(x0+j*(ancho+sep), y0+i*(alto+sep),alto, pixDim);
+					DefEne((x0+j*(ancho+sep))+1*pixDim, (y0+i*(alto+sep))+3*pixDim, (17*pixDim)-1, (8*pixDim)-1,i,j,e, enemigo);
+				}
+
 				if (enemigos [i][j]==0)
 				{
 					DefEne(0,0,0,0,i,j,e, enemigo);
@@ -541,7 +682,7 @@ void killing(int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos e
 					{
 						if (enemigos[i][j]==3)//enemigo que tiene dos vidas
 						{
-							enemigos[i][j]=0;
+							enemigos[i][j]=5;
 							lastEne=lastE(enemigos,f,c);
 						}else{
 							enemigos[i][j]=0;
@@ -1455,6 +1596,243 @@ void DibEne3(int x, int y, int alto, int pixDim){
 
 	}
 }
+void DibEne3_1(int x, int y, int alto, int pixDim){
+	int arre=pixDim-1;//arreglo
+
+
+	for (int i = 0; i < alto; ++i)
+	{
+				
+		if (i==0){
+			for (int d = 0; d < pixDim; ++d){
+				// Amarillo
+				gfx_color(247, 52, 43);
+				gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+6*pixDim+arre,y+(i*pixDim)+d);
+			
+				gfx_color(247, 104, 6);
+				gfx_line(x+4*pixDim,y+(i*pixDim)+d,x+4*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+12*pixDim,y+(i*pixDim)+d,x+12*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+14*pixDim,y+(i*pixDim)+d,x+14*pixDim+arre,y+(i*pixDim)+d);
+
+
+			}
+		}
+
+		if (i==1){
+			for (int d = 0; d < pixDim; ++d){
+				// Amarillo
+				gfx_color(247, 104, 6);
+				gfx_line(x+4*pixDim,y+(i*pixDim)+d,x+4*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+14*pixDim,y+(i*pixDim)+d,x+14*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde claro
+				gfx_color(124, 124, 124);
+				gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+			}
+		}
+		if (i==2){
+			for (int d = 0; d < pixDim; ++d){
+				// Amarillo
+				gfx_color(247, 52, 43);
+				gfx_line(x+9*pixDim,y+(i*pixDim)+d,x+9*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde claro
+				gfx_color(124, 124, 124);
+				gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+13*pixDim,y+(i*pixDim)+d,x+13*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+				gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+
+			}
+		}
+		if (i==3){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+				gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+9*pixDim,y+(i*pixDim)+d,x+9*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+13*pixDim+arre,y+(i*pixDim)+d);
+
+			}
+		}
+		if (i==4){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+9*pixDim,y+(i*pixDim)+d,x+9*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Verde claro
+				gfx_color(124, 124, 124);
+			 	gfx_line(x+8*pixDim,y+(i*pixDim)+d,x+8*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+10*pixDim,y+(i*pixDim)+d,x+10*pixDim+arre,y+(i*pixDim)+d);
+
+			 }
+		}
+		if (i==5){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde pistacho
+				gfx_color(50, 50, 50);
+				gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+				gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+8*pixDim,y+(i*pixDim)+d,x+10*pixDim+arre,y+(i*pixDim)+d);
+
+
+			}
+		}
+		if (i==6){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Verde claro
+				gfx_color(124, 124, 124);
+			 	gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+6*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+12*pixDim,y+(i*pixDim)+d,x+12*pixDim+arre,y+(i*pixDim)+d);
+
+			}
+		}
+		if (i==7){
+			for (int d = 0; d < pixDim; ++d){
+			 	// Verde claro
+				gfx_color(124, 124, 124);
+			 	gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+13*pixDim,y+(i*pixDim)+d,x+13*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+12*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Blanco
+			 	gfx_color(253, 246, 213);			 	
+			 	gfx_line(x+8*pixDim,y+(i*pixDim)+d,x+10*pixDim+arre,y+(i*pixDim)+d);
+
+			}
+		}
+
+		if (i==8){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde pistacho
+				gfx_color(50, 50, 50);
+				gfx_line(x+4*pixDim,y+(i*pixDim)+d,x+4*pixDim+arre,y+(i*pixDim)+d);
+				gfx_color(247, 52, 43);
+				gfx_line(x+14*pixDim,y+(i*pixDim)+d,x+14*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde oscuro
+				gfx_color(247, 52, 43);
+			 	gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+6*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+12*pixDim,y+(i*pixDim)+d,x+13*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Negro
+			 	gfx_color(57, 51, 32);
+			 	gfx_line(x+9*pixDim,y+(i*pixDim)+d,x+9*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Blanco
+			 	gfx_color(253, 246, 213);			 	
+			 	gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+8*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+10*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+
+			}
+		}		
+
+
+		if (i==9){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde oscuro
+				gfx_color(50, 50, 50);
+			 	gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+13*pixDim,y+(i*pixDim)+d,x+13*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Negro
+			 	gfx_color(57, 51, 32);
+			 	gfx_line(x+8*pixDim,y+(i*pixDim)+d,x+10*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Blanco
+			 	gfx_color(253, 246, 213);			 	
+			 	gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+12*pixDim+arre,y+(i*pixDim)+d);
+
+
+			}
+		}
+		if (i==10){
+			for (int d = 0; d < pixDim; ++d){
+
+				// Verde pistacho
+				gfx_color(40, 40, 40);
+			 	gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);
+				gfx_color(50, 50, 50);
+			 	gfx_line(x+13*pixDim,y+(i*pixDim)+d,x+13*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+4*pixDim,y+(i*pixDim)+d,x+4*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+6*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+12*pixDim,y+(i*pixDim)+d,x+12*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+14*pixDim,y+(i*pixDim)+d,x+14*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Negro
+			 	gfx_color(57, 51, 32);
+			 	gfx_line(x+9*pixDim,y+(i*pixDim)+d,x+9*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Blanco
+			 	gfx_color(253, 246, 213);			 	
+			 	gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+8*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+10*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+
+
+			}
+		}
+		if (i==11){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde pistacho
+				gfx_color(50, 50, 50);
+			 	gfx_line(x+4*pixDim,y+(i*pixDim)+d,x+4*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+14*pixDim,y+(i*pixDim)+d,x+14*pixDim+arre,y+(i*pixDim)+d);
+
+				// Verde oscuro
+				gfx_color(79, 79, 79);
+			 	gfx_line(x+6*pixDim,y+(i*pixDim)+d,x+7*pixDim+arre,y+(i*pixDim)+d);
+			 	gfx_line(x+11*pixDim,y+(i*pixDim)+d,x+12*pixDim+arre,y+(i*pixDim)+d);
+
+			 	// Blanco
+			 	gfx_color(253, 246, 213);			 	
+			 	gfx_line(x+8*pixDim,y+(i*pixDim)+d,x+10*pixDim+arre,y+(i*pixDim)+d);
+
+
+			}
+		}
+		if (i==12){
+			for (int d = 0; d < pixDim; ++d){
+				// Verde pistacho
+
+				gfx_color(247, 52, 43);
+			 	gfx_line(x+7*pixDim,y+(i*pixDim)+d,x+8*pixDim+arre,y+(i*pixDim)+d);
+				gfx_color(40, 40, 40);
+			 	gfx_line(x+9*pixDim,y+(i*pixDim)+d,x+11*pixDim+arre,y+(i*pixDim)+d);
+
+			}
+		}
+
+	}
+}
+
 void DibEne4(int x, int y, int alto, int pixDim){
 	int arre=pixDim-1;//arreglo
 
@@ -2159,10 +2537,12 @@ void menuJugar(int &opt, int &instr,DatosJugador &jugador, int &cantE, bool &win
 				stats(jugador,cantE,win,b);
 				break;
 			case 2:
-				//Instrucciones nivel 2
+				lvl2(jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
 				break;
 			case 3:
-				//instrucciones nivel 3
+				lvl3(jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
 				break;
 			case 4:
 				mainMenu(opt, instr);
