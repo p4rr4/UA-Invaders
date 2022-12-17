@@ -73,9 +73,9 @@ void stats(DatosJugador jugador,int cantE, bool win, int b);
 
 // Levels
 void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-/*void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
 void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-*/
+
 
 int main()
 {
@@ -108,8 +108,7 @@ void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int x=70;//initial x of enemies
 	int y=20;//initial y of enemies
 	int sep=24;//separation between enemies
-	void killing(int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne);
-const int F=8;//filas matriz enemigos
+	const int F=8;//filas matriz enemigos
 	const int C=10;//columnas matriz enemigos
 	int dist=10;//distancia de cada movimiento
 	int pixDim=4;//dimension de los píxeles
