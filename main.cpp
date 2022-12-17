@@ -151,7 +151,7 @@ void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 }
 int lastE(int enemigos[][10],int f, int c){
 
-	int ene;
+	int ene=0;
 
 	for (int i = 0; i < f; ++i)
 	{
