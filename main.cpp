@@ -33,6 +33,7 @@ struct DatosJugador{
 	int vida;
 };
 
+void introAnim();
 void initialAnimation(char &answer);
 void mainMenu(int &opt, int &instr);
 void printLetter();
@@ -2546,14 +2547,17 @@ void menuJugar(int &opt, int &instr,DatosJugador &jugador, int &cantE, bool &win
 				} while (!(opt<=4 & opt>=1));
 				switch (opt) {
 				case 1:
+					introAnim();
 					lvl1(jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
 					break;
 				case 2:
+					introAnim();
 					lvl2(jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
 					break;
 				case 3:
+					introAnim();
 					lvl3(jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
 					break;
@@ -2574,4 +2578,63 @@ void menuJugar(int &opt, int &instr,DatosJugador &jugador, int &cantE, bool &win
 			default:
 				break;
 			}
+}
+
+void introAnim() {
+	system("clear");
+	cout << "\n\n\n\n\n";
+	cout << "\t\t\t\t\t\t\u001b[33m 333333333333333   "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m3:::::::::::::::33 "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m3::::::33333::::::3"<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m3333333     3:::::3"<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m            3:::::3"<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m            3:::::3"<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m    33333333:::::3 "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m    3:::::::::::3  "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m    33333333:::::3 "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m            3:::::3"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m            3:::::3"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m3333333     3:::::3"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m3::::::33333::::::3"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m3:::::::::::::::33 "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m 333333333333333   "<< endl;
+
+	usleep(1000000);
+	system("clear");
+	cout << "\n\n\n\n\n";
+	cout << "\t\t\t\t\t\t\u001b[33m 222222222222222    "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m2:::::::::::::::22  "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m2::::::222222:::::2 "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m2222222     2:::::2 "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m            2:::::2 "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m         2222::::2  "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m    22222::::::22   "<< endl;  
+	cout << "\t\t\t\t\t\t\u001b[33m  22::::::::222     "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m 2:::::22222        "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m2:::::2             "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m2:::::2             "<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m2:::::2       222222"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m2::::::2222222:::::2"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m2::::::::::::::::::2"<< endl;
+	cout << "\t\t\t\t\t\t\u001b[33m22222222222222222222"<< endl;
+
+	usleep(1000000);
+	system("clear");
+	cout << "\n\n\n\n\n";
+	cout << "\t\t\t\t\t\t\t\u001b[33m  1111111   "<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m 1::::::1   "<< endl;  
+	cout << "\t\t\t\t\t\t\t\u001b[33m1:::::::1   "<< endl;  
+	cout << "\t\t\t\t\t\t\t\u001b[33m111:::::1   "<< endl;  
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::1   "<< endl;  
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::1   "<< endl;  
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::1   "<< endl;  
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::l   "<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::l   "<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::l   "<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::l   "<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m111::::::111"<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
+	cout << "\t\t\t\t\t\t\t\u001b[33m111111111111"<< endl;
+
 }
