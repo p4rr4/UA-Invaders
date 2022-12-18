@@ -2636,5 +2636,6 @@ void introAnim() {
 	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
 	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
 	cout << "\t\t\t\t\t\t\t\u001b[33m111111111111"<< endl;
+	usleep(1000000);
 
 }
