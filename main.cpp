@@ -2520,9 +2520,9 @@ void menuJugar(int &opt, int &instr,DatosJugador &jugador, int &cantE, bool &win
 	instr = 1;
 	printLetter();
 		do {
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1 (Tυƚσɾιαʅ)";
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2 (Iɳƚҽɾɱҽԃιαƚҽ)";
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3 (Hαɾԃ)";
+			cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
+			cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Pԋαʂҽ 2";
+			cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Pԋαʂҽ 3";
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
 			cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
 			cin>>opt;
@@ -2532,16 +2532,41 @@ void menuJugar(int &opt, int &instr,DatosJugador &jugador, int &cantE, bool &win
 		} while (!(opt<=4 & opt>=1));
 		switch (opt){
 			case 1:
-				lvl1(jugador,cantE,win,b,input);
-				stats(jugador,cantE,win,b);
+				printLetter();
+				do {
+					cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1";
+					cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2";
+					cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3";
+					cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+					cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
+					cin>>opt;
+					if (!(opt<=4 & opt>=1)) {
+						cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ\n";
+					}
+				} while (!(opt<=4 & opt>=1));
+				switch (opt) {
+				case 1:
+					lvl1(jugador,cantE,win,b,input);
+					stats(jugador,cantE,win,b);
+					break;
+				case 2:
+					lvl2(jugador,cantE,win,b,input);
+					stats(jugador,cantE,win,b);
+					break;
+				case 3:
+					lvl3(jugador,cantE,win,b,input);
+					stats(jugador,cantE,win,b);
+					break;
+				case 4:
+					menuJugar(opt,instr,jugador,cantE,win,b,input);
+					break;
+				default:
+					break;
+				}
 				break;
 			case 2:
-				lvl2(jugador,cantE,win,b,input);
-				stats(jugador,cantE,win,b);
 				break;
 			case 3:
-				lvl3(jugador,cantE,win,b,input);
-				stats(jugador,cantE,win,b);
 				break;
 			case 4:
 				mainMenu(opt, instr);
