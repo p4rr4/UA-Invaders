@@ -2384,12 +2384,12 @@ void DibP(int x, int y, int alto, int pixDim,int &hitJ, DatosJugador jugador){
 		if (i==14)
 		{
 			for (int d = 0; d < pixDim; ++d)
-			{i
+			{
 				gfx_color(color[0], color[1], color[2]);
 				gfx_line(x+0*pixDim,y+(i*pixDim)+d,x+4*pixDim+arre,y+(i*pixDim)+d);
 				gfx_line(x+20*pixDim,y+(i*pixDim)+d,x+24*pixDim+arre,y+(i*pixDim)+d);
 				gfx_color(color2[0], color2[1], color2[2]);
-				gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);i
+				gfx_line(x+5*pixDim,y+(i*pixDim)+d,x+5*pixDim+arre,y+(i*pixDim)+d);
 				gfx_line(x+10*pixDim,y+(i*pixDim)+d,x+14*pixDim+arre,y+(i*pixDim)+d);
 				gfx_line(x+19*pixDim,y+(i*pixDim)+d,x+19*pixDim+arre,y+(i*pixDim)+d);
 				gfx_color(color1[0], color1[1], color1[2]);
