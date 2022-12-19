@@ -696,21 +696,22 @@ void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, Dato
 			{
 				for (int j = 0; j < c; ++j)
 				{
-					if (enemigo[j+i*c].y + enemigo[j+i*c].alto > bala[b].y && enemigo[j+i*c].x + enemigo[j+i*c].ancho > bala[b].x && enemigo[j+i*c].y < bala[b].y + bala[b].alto && enemigo[j+i*c].x < bala[b].x + bala[b].ancho)
-					{
-						if (enemigos[i][j]==3)//enemigo que tiene dos vidas
+					if(enemigo[i][j]!=0){
+						if (enemigo[j+i*c].y + enemigo[j+i*c].alto > bala[b].y && enemigo[j+i*c].x + enemigo[j+i*c].ancho > bala[b].x && enemigo[j+i*c].y < bala[b].y + bala[b].alto && enemigo[j+i*c].x < bala[b].x + bala[b].ancho)
 						{
-							enemigos[i][j]=5;
-							lastEne=lastE(enemigos,f,c);
-						}else{
-							score=sumScore(enemigos,i,j,score);
-							enemigos[i][j]=0;
-							enemigo[j+i*c].contador=30;
-							lastEne=lastE(enemigos,f,c);
+							if (enemigos[i][j]==3)//enemigo que tiene dos vidas
+							{
+								enemigos[i][j]=5;
+								lastEne=lastE(enemigos,f,c);
+							}else{
+								score=sumScore(enemigos,i,j,score);
+								enemigos[i][j]=0;
+								enemigo[j+i*c].contador=30;
+								lastEne=lastE(enemigos,f,c);
+							}
+
+							DefBala(b,0,0,0, enemigo, bala, jugador);
 						}
-
-						DefBala(b,0,0,0, enemigo, bala, jugador);
-
 					}
 				}
 			}
