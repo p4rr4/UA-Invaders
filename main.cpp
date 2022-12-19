@@ -696,7 +696,7 @@ void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, Dato
 			{
 				for (int j = 0; j < c; ++j)
 				{
-					if(enemigo[i][j]!=0){
+					if(enemigos[i][j]!=0){
 						if (enemigo[j+i*c].y + enemigo[j+i*c].alto > bala[b].y && enemigo[j+i*c].x + enemigo[j+i*c].ancho > bala[b].x && enemigo[j+i*c].y < bala[b].y + bala[b].alto && enemigo[j+i*c].x < bala[b].x + bala[b].ancho)
 						{
 							if (enemigos[i][j]==3)//enemigo que tiene dos vidas
