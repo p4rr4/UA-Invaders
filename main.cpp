@@ -2447,22 +2447,22 @@ void initialAnimation(char &answer) {
 }
 void mainMenu(int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	
-	printLetter();
 
-	opt = 0;
+	opt = 1;
 
 
 	do {
+		printLetter();
 		clearbuffer();
 		cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pʅαყ";
 		cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Iɳʂƚɾυƈƚισɳʂ";
 		cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Cɾҽԃιƚʂ";
 		cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Qυιƚ";
+		if (!(opt<=4 & opt>=1)) {
+				cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
+		}
 		cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
 		cin>>opt;
-		if (!(opt<=4 & opt>=1)) {
-				cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ\n";
-		}
 	}while (!(opt<=4 & opt>=1));
 	switch (opt) {
 	case 1:
@@ -2497,16 +2497,16 @@ void printLetter(){
 }
 void credits(int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	char ans1;
-	printLetter();
-	cout << "\n\n\t\t\t\t\t\t\u001b[34mAԃɾιáɳ Tҽɳԃҽɾσ Gαɾƈíα";
-	cout << "\n\n\t\t\t\t\t\t\u001b[34mAʅҽʝαɳԃɾσ Bҽɳιƚσ Mαɾƈσʂ";
-	cout << "\n\n\t\t\t\t\t\t\u001b[34mJҽʂúʂ Pαɾɾα Gαɾƈíα";
 	do {
-		cout << "\n\n\t\t\t\t\t\t\u001b[34mExιƚ (e): ";
-		cin >> ans1;
+		printLetter();
+		cout << "\n\n\t\t\t\t\t\t\u001b[34mAԃɾιáɳ Tҽɳԃҽɾσ Gαɾƈíα";
+		cout << "\n\n\t\t\t\t\t\t\u001b[34mAʅҽʝαɳԃɾσ Bҽɳιƚσ Mαɾƈσʂ";
+		cout << "\n\n\t\t\t\t\t\t\u001b[34mJҽʂúʂ Pαɾɾα Gαɾƈíα";
 		if (ans1!='e') {
 				cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ\n";
 		}
+		cout << "\n\n\t\t\t\t\t\t\u001b[34mExιƚ (e): ";
+		cin >> ans1;
 	}while(ans1!='e');
 	mainMenu(opt,jugador,cantE,win,b,input);
 }
@@ -2518,32 +2518,32 @@ void clearbuffer() {
 }
 void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	int score=0;
-	opt = 0;
-	printLetter();
+	opt = 1;
 		do {
+			printLetter();
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Pԋαʂҽ 2";
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Pԋαʂҽ 3";
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+			if (!(opt<=4 & opt>=1)) {
+				cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
+			}
 			cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
 			cin>>opt;
-			if (!(opt<=4 & opt>=1)) {
-				cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ\n";
-			}
 		} while (!(opt<=4 & opt>=1));
 		switch (opt){
 			case 1:
-				printLetter();
 				do {
+					printLetter();
 					cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1";
 					cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2";
 					cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3";
 					cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+					if (!(opt<=4 & opt>=1)) {
+						cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
+					}
 					cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
 					cin>>opt;
-					if (!(opt<=4 & opt>=1)) {
-						cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ\n";
-					}
 				} while (!(opt<=4 & opt>=1));
 				switch (opt) {
 				case 1:
