@@ -81,13 +81,12 @@ int sumScore(int enemigos[][10], int f, int c, int &score);
 
 int main()
 {
-	int nvl;
 	DatosJugador jugador;
 	bool win=0;
 	int cantE;
 	int b=0; //identificador de las balas
 	char ans;
-	int option,instr;
+	int option;
 	char name[4];
 	char input;
 
@@ -292,10 +291,6 @@ void lvl3(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char 
 
 	animMatriz(score, jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
-
-
-
-
 int lastE(int enemigos[][10],int f, int c){
 
 	int ene=0;
@@ -879,8 +874,6 @@ void interfaz(int wX,int wY, DatosJugador jugador){
 		xc+=24;
 	}
 }
-
-
 void DibEne1(int x, int y, int alto, int pixDim){
 	int arre=pixDim-1;//arreglo
 
@@ -1850,7 +1843,6 @@ void DibEne3_1(int x, int y, int alto, int pixDim){
 
 	}
 }
-
 void DibEne4(int x, int y, int alto, int pixDim){
 	int arre=pixDim-1;//arreglo
 
@@ -2424,7 +2416,6 @@ void DibP(int x, int y, int alto, int pixDim,int &hitJ, DatosJugador jugador){
 		}
 	}
 }
-
 void initialAnimation(char &answer) {
 
 	system("clear");
@@ -2454,7 +2445,6 @@ void initialAnimation(char &answer) {
 	cout << "\n\n\t\t\t\t\t\t\u001b[34mPɾҽʂʂ ENTER ƚσ ƈσɳƚιɳυҽ...";
 	cin.get();
 }
-
 void mainMenu(int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	
 	printLetter();
@@ -2477,22 +2467,20 @@ void mainMenu(int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b, cha
 	switch (opt) {
 	case 1:
 		menuJugar(opt,jugador,cantE,win,b,input);
-		break;
+	break;
 	case 2:
 		//Instrucciones
-		break;
+	break;
 	case 3:
 		credits(opt,jugador,cantE,win,b,input);
-		break;
+	break;
 	case 4:
 		cout << "\n\n\t\t\t\t\t\t\u001b[34mᎶᎧᎧᎴᏰᎩᏋ\n";
 		exit(0);
 	default:
-		break;
+	break;
 	}
-
 }
-
 void printLetter(){
 	system("clear");
 	cout << "\n\n\n";
@@ -2507,7 +2495,6 @@ void printLetter(){
 	cout << "\t\t\033[0;32m   ░           ░  ░    ░           ░      ░        ░  ░   ░       ░  ░   ░           ░  \n";
 	cout << "\t\t\033[0;32m                                         ░              ░                               \n";
 }
-
 void credits(int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	char ans1;
 	printLetter();
@@ -2522,21 +2509,16 @@ void credits(int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b, char
 		}
 	}while(ans1!='e');
 	mainMenu(opt,jugador,cantE,win,b,input);
-
-
-
 }
-
 void clearbuffer() {    
 	char c;
 	do {
 		c = getchar();
 	}while (c != '\n' && c != EOF);
 }
-
 void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
-	opt = 0;
 	int score=0;
+	opt = 0;
 	printLetter();
 		do {
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
@@ -2569,18 +2551,21 @@ void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, c
 					introAnim();
 					lvl1(score,jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
+					cout<<"Score: "<<score<<endl;
 					break;
 				case 2:
 
 					introAnim();
 					lvl2(score,jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
+					cout<<"Score: "<<score<<endl;
 					break;
 				case 3:
 					
 					introAnim();
 					lvl3(score,jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
+					cout<<"Score: "<<score<<endl;
 					break;
 				case 4:
 					menuJugar(opt,jugador,cantE,win,b,input);
@@ -2600,7 +2585,6 @@ void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, c
 				break;
 			}
 }
-
 void introAnim() {
 	system("clear");
 	cout << "\n\n\n\n\n";
@@ -2658,5 +2642,4 @@ void introAnim() {
 	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
 	cout << "\t\t\t\t\t\t\t\u001b[33m111111111111"<< endl;
 	usleep(1000000);
-
 }
