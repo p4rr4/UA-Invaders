@@ -62,21 +62,22 @@ void dibCorazon(int x, int y);
 void interfaz(int wX,int wY, DatosJugador jugador);
 void matriz(int x0, int y0,int ancho, int alto, int sep,int enemigos[][10], int f, int c, int pixDim, DatosEnemigos enemigo[]);
 
-void killing(int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne);
+void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne);
 bool GameOver(int f, int c, DatosEnemigos enemigo[], DatosJugador jugador);
 bool countE(int enemigos[][10],int f, int c, int &cant);
 
-void animDrch(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
-void animIzq(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
-void animMatriz(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
+void animDrch(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
+void animIzq(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
+void animMatriz(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
 
 void stats(DatosJugador jugador,int cantE, bool win, int b);
 
 // Levels
-void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl1(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl2(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
 
+int sumScore(int enemigos[][10], int f, int c, int &score);
 
 int main()
 {
@@ -100,8 +101,24 @@ int main()
 	
 	return 0;
 }
-
-void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+int sumScore(int enemigos[][10], int f, int c, int &score){
+	switch(enemigos[f][c]){
+		case 1:
+			score+=30;
+		break;
+		case 2:
+			score+=20;
+		break;
+		case 4:
+			score+=35;
+		break;
+		case 5:
+			score+=40;
+		break;
+	}
+	return score;
+}
+void lvl1(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int windowX=1200;//X of the window
 	int windowY=900;//Y of the window
 	int x=70;//initial x of enemies
@@ -154,10 +171,10 @@ void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
-	animMatriz(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
 
-void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+void lvl2(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int windowX=1200;//X of the window
 	int windowY=900;//Y of the window
 	int x=20;//initial x of enemies
@@ -210,10 +227,10 @@ void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
-	animMatriz(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
 
-void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+void lvl3(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int windowX=1200;//X of the window
 	int windowY=900;//Y of the window
 	int x=220;//initial x of enemies
@@ -273,7 +290,7 @@ void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
-	animMatriz(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+	animMatriz(score, jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
 
 
@@ -307,17 +324,17 @@ void stats(DatosJugador jugador,int cantE, bool win, int b){
 	}
 	cout<<"numero de balas totales: "<<b<<endl;
 }
-void animMatriz(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
+void animMatriz(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
 
 	while(input!='q' && lost==0 && win==0){
 
-		animDrch(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,f,c);
+		animDrch(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,f,c);
 		yd=yd+alto;
-		animIzq(jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,f,c);
+		animIzq(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,f,c);
 		yd=yd+alto;
 	}
 }
-void animDrch(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
+void animDrch(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
 	int r=0;
 
 	lastEne=lastE(enemigos,f,c);
@@ -362,7 +379,7 @@ void animDrch(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],in
 		}
 		if(r%ticks==0)xd=x+dist*r/ticks;
 
-		killing(b,enemigos,f,c,hitJ, enemigo, bala, jugador,lastEne);
+		killing(score,b,enemigos,f,c,hitJ, enemigo, bala, jugador,lastEne);
 		lost=GameOver(f,c, enemigo, jugador);
 
 		if ((enemigo[lastEne].y+enemigo[lastEne].alto) > (windowY-40))
@@ -390,7 +407,7 @@ void animDrch(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],in
 		++r;
 	}
 }
-void animIzq(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
+void animIzq(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
 	int l=(k-1)*ticks;
 
 	lastEne=lastE(enemigos,f,c);
@@ -440,7 +457,7 @@ void animIzq(DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int
 		}
 		if(l%ticks==0)xd=x+dist*l/ticks;
 
-		killing(b,enemigos,f,c,hitJ, enemigo, bala, jugador,lastEne);
+		killing(score,b,enemigos,f,c,hitJ, enemigo, bala, jugador,lastEne);
 		lost=GameOver(f,c, enemigo, jugador);
 
 		if ((enemigo[lastEne].y+enemigo[lastEne].alto) > (windowY-40))
@@ -666,7 +683,7 @@ void matriz(int x0, int y0,int ancho, int alto, int sep,int enemigos [][10],int 
 		}
 	}
 }
-void killing(int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne){
+void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne){
 
 	for (int b = 0; b < nb; ++b)
 	{
@@ -676,20 +693,23 @@ void killing(int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos e
 			{
 				for (int j = 0; j < c; ++j)
 				{
-					if (enemigo[j+i*c].y + enemigo[j+i*c].alto > bala[b].y && enemigo[j+i*c].x + enemigo[j+i*c].ancho > bala[b].x && enemigo[j+i*c].y < bala[b].y + bala[b].alto && enemigo[j+i*c].x < bala[b].x + bala[b].ancho)
-					{
-						if (enemigos[i][j]==3)//enemigo que tiene dos vidas
+					if(enemigos[i][j]!=0){
+						if (enemigo[j+i*c].y + enemigo[j+i*c].alto > bala[b].y && enemigo[j+i*c].x + enemigo[j+i*c].ancho > bala[b].x && enemigo[j+i*c].y < bala[b].y + bala[b].alto && enemigo[j+i*c].x < bala[b].x + bala[b].ancho)
 						{
-							enemigos[i][j]=5;
-							lastEne=lastE(enemigos,f,c);
-						}else{
-							enemigos[i][j]=0;
-							enemigo[j+i*c].contador=30;
-							lastEne=lastE(enemigos,f,c);
+							if (enemigos[i][j]==3)//enemigo que tiene dos vidas
+							{
+								enemigos[i][j]=5;
+								lastEne=lastE(enemigos,f,c);
+							}else{
+								score=sumScore(enemigos,i,j,score);
+								enemigos[i][j]=0;
+								enemigo[j+i*c].contador=30;
+								lastEne=lastE(enemigos,f,c);
+							}
+
+							DefBala(b,0,0,0, enemigo, bala, jugador);
+
 						}
-
-						DefBala(b,0,0,0, enemigo, bala, jugador);
-
 					}
 				}
 			}
