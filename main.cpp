@@ -2536,6 +2536,7 @@ void clearbuffer() {
 
 void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	opt = 0;
+	int score=0;
 	printLetter();
 		do {
 			cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
