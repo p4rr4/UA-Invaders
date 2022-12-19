@@ -2566,19 +2566,19 @@ void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, c
 				case 1:
 					
 					introAnim();
-					lvl1(jugador,cantE,win,b,input);
+					lvl1(score,jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
 					break;
 				case 2:
 
 					introAnim();
-					lvl2(jugador,cantE,win,b,input);
+					lvl2(score,jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
 					break;
 				case 3:
 					
 					introAnim();
-					lvl3(jugador,cantE,win,b,input);
+					lvl3(score,jugador,cantE,win,b,input);
 					stats(jugador,cantE,win,b);
 					break;
 				case 4:
