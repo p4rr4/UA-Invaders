@@ -56,15 +56,15 @@ void dibCorazon(int x, int y); // draws hearts (players' lifes)
 
 
 // Levels
-void lvl1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // P1
-void lvl2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Fast
-void lvl3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chess
-void lvl4(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Meteor
-void lvl5(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chaos
-void lvl6(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl7(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl8(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl9(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl1_1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // P1
+void lvl1_2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Fast
+void lvl1_3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chess
+void lvl2_1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Meteor
+void lvl2_2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chaos
+void lvl2_3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3_1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3_2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3_3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
 
 
 // Bullet components
@@ -92,9 +92,6 @@ void animMatriz(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBa
 void stats(DatosJugador jugador,int cantE, bool win, int b);
 
 int sumScore(int enemigos[][10], int f, int c, int &score);
-
-
-
 
 int main()
 {
@@ -134,80 +131,23 @@ int sumScore(int enemigos[][10], int f, int c, int &score){
 	}
 	return score;
 }
-
-void lvl1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
-	int windowX=1200;//X of the window
-	int windowY=900;//Y of the window
-	int x=70;//initial x of enemies
-	int y=20;//initial y of enemies
-	int sep=24;//separation between enemies
-	const int F=8;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=5;//distancia de cada movimiento
+void lvl1_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
 	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
 	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
-	int ticksBala=75;
-	int balasEnemigas1=250;
-	int balasEnemigas4=400;
-	int velBalas=3;
-	int lost=0;
-	int hitJ;
-	int lastEne;
-
-	DatosBalas bala [500];
-	DatosEnemigos enemigo [F*C];
-
-	jugador.ancho= 25*pixDim;
-	jugador.alto= 17*pixDim;
-	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
-	jugador.yH=jugador.y+8*pixDim;
-	jugador.skin=1;
-	jugador.vida=3;
-
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
-
-
-	int enemigos [F][C]=
-	{{0,0,0,0,0,0,0,0,0,0},
-	{0,2,2,2,2,0,0,2,2,0},
-	{0,2,0,0,2,0,2,0,2,0},
-	{0,2,0,0,2,0,0,0,2,0},
-	{0,2,2,2,2,0,0,0,2,0},
-	{0,2,0,0,0,0,0,0,2,0},
-	{0,2,0,0,0,0,0,2,2,2},
-	{0,0,0,0,0,0,0,0,0,0}};
-	
-	gfx_open(windowX, windowY, "UA invaders");
-
-	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
-}
-
-void lvl2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
-	int windowX=1200;//X of the window
-	int windowY=900;//Y of the window
-	int x=60;//initial x of enemies
-	int y=20;//initial y of enemies
-	int sep=24;//separation between enemies
-	const int F=8;//filas matriz enemigos
+	int x=20;//esquina inicial de los enemigos
+	int y=200;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=4;//filas matriz enemigos
 	const int C=10;//columnas matriz enemigos
 	int dist=10;//distancia de cada movimiento
-	int pixDim=4;//dimension de los píxeles
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
 	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
 	int t=300000;//tiempo
 	int ticksBala=75;
-	int balasEnemigas1=100;
-	int balasEnemigas4=400;
+	int balasEnemigas1=1000;
+	int balasEnemigas4=1000;
 	int velBalas=3;
 	int lost=0;
 	int hitJ;
@@ -225,61 +165,6 @@ void lvl2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char
 	jugador.skin=1;
 	jugador.vida=3;
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
-
-
-	int enemigos [F][C]=
-	{{0,2,2,0,0,2,0,0,2,2},
-	{0,2,2,0,0,2,0,0,2,2},
-	{0,2,2,0,0,2,0,0,2,2},
-	{0,0,0,2,0,2,0,2,0,0},
-	{0,0,0,0,2,2,2,0,0,0},
-	{0,0,0,0,0,3,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0}};
-	
-	gfx_open(windowX, windowY, "UA invaders");
-
-	animMatriz(score, jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
-}
-
-void lvl3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
-	int windowX=1200;//X of the window
-	int windowY=900;//Y of the window
-	int x=260;//initial x of enemies
-	int y=20;//initial y of enemies
-	int sep=0;//separation between enemies
-	const int F=15;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=1;//distancia de cada movimiento
-	int pixDim=4;//dimension de los píxeles
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
-	int ticksBala=75;
-	int balasEnemigas1=350;
-	int balasEnemigas4=400;
-	int velBalas=3;
-	int lost=0;
-	int hitJ;
-	int lastEne;
-
-	DatosBalas bala [500];
-	DatosEnemigos enemigo [F*C];
-
-	jugador.ancho= 25*pixDim;
-	jugador.alto= 17*pixDim;
-	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
-	jugador.yH=jugador.y+8*pixDim;
-	jugador.skin=1;
-	jugador.vida=3;
 
 	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
 	int xd=x;//x de dibujado
@@ -287,46 +172,34 @@ void lvl3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char
 	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
 	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
 
-
 	int enemigos [F][C]=
-	{{0,0,0,0,0,0,0,0,0,0},
-	{2,0,2,0,2,0,2,0,2,0},
-	{0,0,0,0,0,0,0,3,0,0},
-	{2,0,0,0,0,0,3,1,2,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{2,0,0,0,0,0,0,0,2,4},
-	{0,0,0,0,0,3,0,0,0,0},
-	{2,0,0,0,0,0,0,0,2,0},
-	{0,0,0,3,0,0,0,0,0,0},
-	{2,0,0,0,0,0,0,0,2,0},
-	{0,3,0,0,0,0,0,0,0,0},
-	{2,0,2,0,2,0,2,0,2,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0}};
+	{{0,0,0,2,0,0,2,0,0,0},
+	{0,0,0,0,2,2,0,0,0,0},
+	{0,0,0,0,2,2,0,0,0,0},
+	{0,0,0,2,0,0,2,0,0,0}};
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
 
-void lvl4(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
-	int windowX=1200;//X of the window
-	int windowY=900;//Y of the window
-	int x=220;//initial x of enemies
-	int y=20;//initial y of enemies
-	int sep=0;//separation between enemies
-	const int F=15;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=5;//distancia de cada movimiento
+void lvl1_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
 	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
 	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=5;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=10;//distancia de cada movimiento
 	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
 	int t=300000;//tiempo
 	int ticksBala=75;
-	int balasEnemigas1=100;
-	int balasEnemigas4=400;
+	int balasEnemigas1=1000;
+	int balasEnemigas4=1000;
 	int velBalas=3;
 	int lost=0;
 	int hitJ;
@@ -344,6 +217,7 @@ void lvl4(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char
 	jugador.skin=1;
 	jugador.vida=3;
 
+
 	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
 	int xd=x;//x de dibujado
 	int yd=y;//y de dibujado
@@ -352,44 +226,34 @@ void lvl4(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char
 
 
 	int enemigos [F][C]=
-	{{4,0,0,1,0,0,1,0,0,4},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,2,0,2,0,0,2,0,2,0},
-	{0,0,2,0,0,0,0,2,0,0},
-	{0,0,0,2,0,0,2,0,0,0},
-	{4,0,2,0,3,3,0,2,0,4},
-	{0,0,0,3,3,3,3,0,0,0},
-	{0,0,3,3,3,3,3,3,0,0},
-	{0,0,0,3,3,3,3,0,0,0},
-	{0,0,0,0,3,3,0,0,0,0},
-	{0,4,0,0,0,0,0,0,4,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0}};
+	{{0,2,0,0,2,2,0,0,2,0},
+	{0,0,2,0,2,2,0,2,0,0},
+	{0,0,3,2,0,0,2,3,0,0},
+	{0,0,0,0,2,2,0,0,0,0},
+	{0,0,0,0,3,3,0,0,0,0}};
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score, jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
 
-void lvl5(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
-	int windowX=1200;//X of the window
-	int windowY=900;//Y of the window
-	int x=110;//initial x of enemies
-	int y=20;//initial y of enemies
-	int sep=24;//separation between enemies
-	const int F=15;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=1;//distancia de cada movimiento
+void lvl1_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
 	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
 	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
 	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=6;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=10;//distancia de cada movimiento
 	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
 	int t=300000;//tiempo
 	int ticksBala=75;
-	int balasEnemigas1=150;
-	int balasEnemigas4=400;
+	int balasEnemigas1=1000;
+	int balasEnemigas4=1000;
 	int velBalas=3;
 	int lost=0;
 	int hitJ;
@@ -407,6 +271,7 @@ void lvl5(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char
 	jugador.skin=1;
 	jugador.vida=3;
 
+
 	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
 	int xd=x;//x de dibujado
 	int yd=y;//y de dibujado
@@ -415,29 +280,355 @@ void lvl5(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char
 
 
 	int enemigos [F][C]=
-	{{5,5,5,2,5,2,5,5,5,5},
-	{5,5,0,0,2,1,2,0,5,5},
-	{5,0,2,0,0,3,0,2,0,5},
-	{0,1,2,0,2,0,0,2,0,0},
-	{0,3,2,4,0,2,0,2,1,2},
-	{2,0,2,2,0,2,4,0,4,2},
+	{{2,0,0,2,0,0,2,0,0,2},
+	{0,3,3,0,3,3,0,3,3,0},
+	{0,3,3,0,3,3,0,3,3,0},
 	{2,0,0,2,0,0,2,0,0,2},
-	{2,0,0,2,0,2,0,2,0,0},
-	{2,0,0,0,0,2,0,2,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0}};
+	{3,0,0,3,0,0,3,0,0,3},
+	{0,2,2,0,2,2,0,2,2,0}};
 	
 	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
 }
 
+void lvl2_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=8;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=15;//distancia de cada movimiento
+	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=50;
+	int balasEnemigas1=200;
+	int balasEnemigas4=1000;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=2;
+	jugador.vida=4;
 
 
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+
+	int enemigos [F][C]=
+	{{1,0,0,0,1,1,0,0,0,1},
+	{0,2,0,3,0,0,3,0,2,0},
+	{2,0,2,0,3,3,0,2,0,2},
+	{2,0,2,0,3,3,0,2,0,2},
+	{0,0,0,3,0,0,3,0,0,0},
+	{0,1,0,0,0,0,0,0,1,0},
+	{0,0,0,1,0,0,1,0,0,0},
+	{0,2,2,0,0,0,0,2,2,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(score, jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+
+void lvl2_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=7;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=15;//distancia de cada movimiento
+	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=50;
+	int balasEnemigas1=200;
+	int balasEnemigas4=1000;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=2;
+	jugador.vida=4;
+
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+
+	int enemigos [F][C]=
+	{{0,3,0,1,0,0,1,0,3,0},
+	{3,0,3,0,2,2,0,3,0,3},
+	{0,5,0,0,2,2,0,0,5,0},
+	{5,1,5,5,1,1,5,5,1,5},
+	{0,5,0,5,0,0,5,0,5,0},
+	{0,0,2,0,3,3,0,2,0,0},
+	{1,0,0,3,0,0,3,0,0,1}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+void lvl2_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=9;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=15;//distancia de cada movimiento
+	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=75;
+	int balasEnemigas1=200;
+	int balasEnemigas4=400;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=2;
+	jugador.vida=4;
+
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+	int enemigos [F][C]=
+	{{3,0,0,2,0,0,2,0,0,3},
+	{0,0,1,0,0,0,0,1,0,0},
+	{0,0,2,2,0,0,2,2,0,0},
+	{0,0,4,2,2,2,2,4,0,0},
+	{0,3,0,0,2,2,0,0,3,0},
+	{4,0,0,0,0,0,0,0,0,4},
+	{0,0,4,0,1,1,0,4,0,0},
+	{0,4,0,0,0,0,0,0,4,0},
+	{0,2,0,0,2,2,0,0,2,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=8;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=15;//distancia de cada movimiento
+	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=75;
+	int balasEnemigas1=100;
+	int balasEnemigas4=300;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=2;
+	jugador.vida=4;
+
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+	int enemigos [F][C]=
+	{{2,4,2,0,2,2,0,2,4,2},
+	{4,2,0,2,0,0,2,0,2,4},
+	{5,3,0,0,5,5,0,0,3,5},
+	{2,1,3,0,4,4,0,3,1,2},
+	{0,2,0,3,0,0,3,0,2,0},
+	{3,0,3,5,0,0,5,3,0,3},
+	{0,0,0,1,0,0,1,0,0,0},
+	{0,0,2,0,0,0,0,2,0,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+void lvl3_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=9;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=15;//distancia de cada movimiento
+	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=75;
+	int balasEnemigas1=100;
+	int balasEnemigas4=200;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=2;
+	jugador.vida=4;
+
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+	int enemigos [F][C]=
+	{{4,5,5,0,0,0,0,5,5,4},
+	{0,5,5,0,1,1,0,5,5,0},
+	{2,1,0,4,0,0,4,0,1,2},
+	{3,2,0,0,0,0,0,0,2,3},
+	{4,3,2,1,0,0,1,2,3,4},
+	{0,0,3,2,0,0,2,3,0,0},
+	{0,2,0,3,2,2,3,0,2,0},
+	{0,0,0,0,5,5,0,0,0,0},
+	{0,2,0,2,0,0,2,0,2,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
+void lvl3_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input){
+	int pixDim=4;//dimension de los píxeles
+	int windowX=1200;//X de la ventana
+	int windowY=900;//Y de la ventana
+	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
+	int alto=13*pixDim;//de cada enemigo unico (no tocar)
+	int x=20;//esquina inicial de los enemigos
+	int y=20;//esquina inicial de los enemigos
+	int sep=12;//separacion entre enemigos
+	const int F=11;//filas matriz enemigos
+	const int C=10;//columnas matriz enemigos
+	int dist=15;//distancia de cada movimiento
+	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
+	int t=300000;//tiempo
+	int ticksBala=75;
+	int balasEnemigas1=100;
+	int balasEnemigas4=200;
+	int velBalas=3;
+	int lost=0;
+	int hitJ;
+	int lastEne;
+
+	DatosBalas bala [500];
+	DatosEnemigos enemigo [F*C];
+
+	jugador.ancho= 25*pixDim;
+	jugador.alto= 17*pixDim;
+	jugador.altoh = 10*pixDim;
+	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.yH=jugador.y+8*pixDim;
+	jugador.skin=2;
+	jugador.vida=6;
+
+
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
+	int xd=x;//x de dibujado
+	int yd=y;//y de dibujado
+	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
+	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+
+	int enemigos [F][C]=
+	{{0,5,0,5,0,0,5,0,5,0},
+	{0,0,5,0,0,0,0,5,0,0},
+	{3,1,0,2,0,0,2,0,1,3},
+	{0,0,2,0,2,2,0,2,0,0},
+	{3,0,3,3,0,0,3,3,0,3},
+	{1,3,4,1,3,3,1,4,3,1},
+	{3,0,3,3,0,0,3,3,0,3},
+	{0,0,0,0,0,0,0,0,0,0},
+	{2,0,0,0,0,0,0,0,0,2},
+	{0,0,2,0,0,0,0,2,0,0},
+	{0,5,0,0,2,2,0,0,5,0}};
+	
+	gfx_open(windowX, windowY, "UA invaders");
+
+	animMatriz(score,jugador,enemigo,bala,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,input,F,C);
+}
 int lastE(int enemigos[][10],int f, int c){
 
 	int ene=0;
@@ -705,8 +896,6 @@ void dibExp(int x, int y, int alto, int pixDim){
 
 	}
 }
-
-
 void dibCorazon(int x, int y){
 	int pixDim=2;
 	int alto=13;
@@ -2724,71 +2913,145 @@ void clearbuffer() {
 void menuJugar(int &opt, DatosJugador &jugador, int &cantE, bool &win, int &b, char &input) {
 	int score=0;
 	opt = 1;
-		do {
-			printLetter();
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Pԋαʂҽ 2";
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Pԋαʂҽ 3";
-			cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
-			if (!(opt<=4 & opt>=1)) {
-				cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
-			}
-			cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
-			cin>>opt;
-		} while (!(opt<=4 & opt>=1));
-		switch (opt){
-			case 1:
-				do {
-					printLetter();
-					cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1";
-					cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2";
-					cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3";
-					cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
-					if (!(opt<=4 & opt>=1)) {
-						cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
-					}
-					cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
-					cin>>opt;
-				} while (!(opt<=4 & opt>=1));
-				switch (opt) {
-				case 1:
-					
-					introAnim();
-					lvl1(score,jugador,cantE,win,b,input);
-					stats(jugador,cantE,win,b);
-					cout<<"Score: "<<score<<endl;
-					break;
-				case 2:
-
-					introAnim();
-					lvl2(score,jugador,cantE,win,b,input);
-					stats(jugador,cantE,win,b);
-					cout<<"Score: "<<score<<endl;
-					break;
-				case 3:
-					
-					introAnim();
-					lvl3(score,jugador,cantE,win,b,input);
-					stats(jugador,cantE,win,b);
-					cout<<"Score: "<<score<<endl;
-					break;
-				case 4:
-					menuJugar(opt,jugador,cantE,win,b,input);
-					break;
-				default:
-					break;
+	do {
+		printLetter();
+		cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
+		cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Pԋαʂҽ 2";
+		cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Pԋαʂҽ 3";
+		cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+		if (!(opt<=4 & opt>=1)) {
+			cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
+		}
+		cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
+		cin>>opt;
+	} while (!(opt<=4 & opt>=1));
+	switch (opt){
+		case 1:
+			do {
+				printLetter();
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+				if (!(opt<=4 & opt>=1)) {
+					cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
 				}
-				break;
+				cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
+				cin>>opt;
+			} while (!(opt<=4 & opt>=1));
+
+			switch (opt) {
+			case 1:
+				introAnim();
+				lvl1_1(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
 			case 2:
-				break;
+				introAnim();
+				lvl1_2(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
 			case 3:
-				break;
+				introAnim();
+				lvl1_3(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
 			case 4:
-				mainMenu(opt,jugador,cantE,win,b,input);
-				break;
+				menuJugar(opt,jugador,cantE,win,b,input);
+			break;
 			default:
-				break;
+			break;
 			}
+		break;
+		case 2:
+			do {
+				printLetter();
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+				if (!(opt<=4 & opt>=1)) {
+					cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
+				}
+				cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
+				cin>>opt;
+			} while (!(opt<=4 & opt>=1));
+
+			switch (opt) {
+			case 1:
+				introAnim();
+				lvl2_1(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
+			case 2:
+				introAnim();
+				lvl2_2(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
+			case 3:
+				introAnim();
+				lvl2_3(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
+			case 4:
+				menuJugar(opt,jugador,cantE,win,b,input);
+			break;
+			default:
+			break;
+			}
+		break;
+		case 3:
+			do {
+				printLetter();
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Lҽʋҽʅ 1";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m2. Lҽʋҽʅ 2";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m3. Lҽʋҽʅ 3";
+				cout << "\n\n\t\t\t\t\t\t\u001b[34m4. Bαƈƙ";
+				if (!(opt<=4 & opt>=1)) {
+					cout << "\n\n\t\t\t\t\t\t\u001b[34mIɳʋαʅιԃ Oρƚισɳ";
+				}
+				cout << "\n\n\t\t\t\t\t\t\u001b[34mOρƚισɳ: ";
+				cin>>opt;
+			} while (!(opt<=4 & opt>=1));
+
+			switch (opt) {
+			case 1:
+				introAnim();
+				lvl3_1(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
+			case 2:
+				introAnim();
+				lvl3_2(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
+			case 3:
+				introAnim();
+				lvl3_3(score,jugador,cantE,win,b,input);
+				stats(jugador,cantE,win,b);
+				cout<<"Score: "<<score<<endl;
+			break;
+			case 4:
+				menuJugar(opt,jugador,cantE,win,b,input);
+			break;
+			default:
+			break;
+			}
+		break;
+		case 4:
+			mainMenu(opt,jugador,cantE,win,b,input);
+		break;
+		default:
+		break;
+	}
 }
 void introAnim() {
 	system("clear");
