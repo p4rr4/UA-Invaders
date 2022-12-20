@@ -3131,7 +3131,6 @@ void introAnim() {
 	cout << "\t\t\t\t\t\t\t\u001b[33m   1::::l   "<< endl;
 	cout << "\t\t\t\t\t\t\t\u001b[33m111::::::111"<< endl;
 	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
-	cout << "\t\t\t\t\t\t\t\u001b[33m1::::::::::1"<< endl;
 	cout << "\t\t\t\t\t\t\t\u001b[33m111111111111"<< endl;
 	usleep(1000000);
 }
