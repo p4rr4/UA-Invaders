@@ -2483,96 +2483,120 @@ void DibP(int x, int y, int alto, int pixDim,int &hitJ, DatosJugador jugador){
 	int color5[3];	   //azul claro
 	int color6[3];	   //rojo
 
-		switch(jugador.skin) //seleccionador de skin
-		{
-			case 1:
-				if (hitJ>0)
-				{
-					color[0]=255;//color daño
-					color[1]=150;
-					color[2]=150;
-					hitJ--;
-				}else{
-					color[0]=255;//color blanco
-					color[1]=255;
-					color[2]=255;
-				}
+	switch(jugador.skin) //seleccionador de skin
+	{
+		case 1:
+			if (hitJ>0)
+			{
+				color[0]=255;//color daño
+				color[1]=150;
+				color[2]=150;
+				hitJ--;
+			}else{
+				color[0]=255;//color blanco
+				color[1]=255;
+				color[2]=255;
+			}
 
-				color1[0]=150;//color gris
-				color1[1]=150;
-				color1[2]=150;
+			color1[0]=150;//color gris
+			color1[1]=150;
+			color1[2]=150;
 
-				color2[0]=75;//color negro
-				color2[1]=75;
-				color2[2]=75;
+			color2[0]=75;//color negro
+			color2[1]=75;
+			color2[2]=75;
 
-				color3[0]=75;//color azul oscuro
-				color3[1]=75;
-				color3[2]=200;
+			color3[0]=75;//color azul oscuro
+			color3[1]=75;
+			color3[2]=200;
 
-				color4[0]=100;//color azul medio
-				color4[1]=100;
-				color4[2]=255;
+			color4[0]=100;//color azul medio
+			color4[1]=100;
+			color4[2]=255;
 
-				color5[0]=150;//color azul claro
-				color5[1]=150;
-				color5[2]=255;
+			color5[0]=150;//color azul claro
+			color5[1]=150;
+			color5[2]=255;
 
-				color6[0]=255;//color rojo
-				color6[1]=0;
-				color6[2]=0;
-			break;
-			case 2:
-				if (hitJ>0)
-				{
-					color[0]=200;//color daño
-					color[1]=50;
-					color[2]=50;
-					hitJ--;
-				}else{
-					color[0]=0;//color blanco
-					color[1]=100;
-					color[2]=0;
-				}
+			color6[0]=255;//color rojo
+			color6[1]=0;
+			color6[2]=0;
+		break;
+		case 2:
+			if (hitJ>0)
+			{
+				color[0]=200;//color daño
+				color[1]=50;
+				color[2]=50;
+				hitJ--;
+			}else{
+				color[0]=0;//color blanco
+				color[1]=100;
+				color[2]=0;
+			}
 
-				color1[0]=150;//color gris
-				color1[1]=150;
-				color1[2]=150;
+			color1[0]=175;//color gris
+			color1[1]=175;
+			color1[2]=175;
 
-				color2[0]=75;//color negro
-				color2[1]=75;
-				color2[2]=75;
+			color2[0]=75;//color negro
+			color2[1]=75;
+			color2[2]=75;
 
-				color3[0]=75;//color azul oscuro
-				color3[1]=75;
-				color3[2]=200;
+			color3[0]=75;//color azul oscuro
+			color3[1]=75;
+			color3[2]=200;
 
-				color4[0]=100;//color azul medio
-				color4[1]=100;
-				color4[2]=255;
+			color4[0]=100;//color azul medio
+			color4[1]=100;
+			color4[2]=255;
 
-				color5[0]=150;//color azul claro
-				color5[1]=150;
-				color5[2]=255;
+			color5[0]=150;//color azul claro
+			color5[1]=150;
+			color5[2]=255;
 
-				color6[0]=255;//color rojo
-				color6[1]=0;
-				color6[2]=0;
-			break;
-			case 3:
-				if (hitJ>0)
-				{
-					color[0]=255;//color daño
-					color[1]=150;
-					color[2]=150;
-					hitJ--;
-				}else{
-					color[0]=255;//color base
-					color[1]=255;
-					color[2]=255;
-				}
-			break;
-		}
+			color6[0]=150;//color rojo
+			color6[1]=0;
+			color6[2]=150;
+		break;
+		case 3:
+			if (hitJ>0)
+			{
+				color[0]=100;//color daño
+				color[1]=100;
+				color[2]=255;
+				hitJ--;
+			}else{
+				color[0]=125;//color blanco
+				color[1]=15;
+				color[2]=15;
+			}
+
+			color1[0]=75;//color gris
+			color1[1]=75;
+			color1[2]=100;
+
+			color2[0]=50;//color negro
+			color2[1]=50;
+			color2[2]=50;
+
+			color3[0]=75;//color azul oscuro
+			color3[1]=75;
+			color3[2]=200;
+
+			color4[0]=100;//color azul medio
+			color4[1]=100;
+			color4[2]=255;
+
+			color5[0]=150;//color azul claro
+			color5[1]=150;
+			color5[2]=255;
+
+			color6[0]=100;//color rojo
+			color6[1]=50;
+			color6[2]=0;
+		break;
+	}
 
 	for (int i = 0; i < alto; ++i)
 	{
