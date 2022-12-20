@@ -2580,17 +2580,17 @@ void DibP(int x, int y, int alto, int pixDim,int &hitJ, DatosJugador jugador){
 			color2[1]=50;
 			color2[2]=50;
 
-			color3[0]=75;//color azul oscuro
-			color3[1]=75;
-			color3[2]=200;
+			color3[0]=50;//color azul oscuro
+			color3[1]=50;
+			color3[2]=150;
 
-			color4[0]=100;//color azul medio
-			color4[1]=100;
-			color4[2]=255;
+			color4[0]=75;//color azul medio
+			color4[1]=75;
+			color4[2]=200;
 
-			color5[0]=150;//color azul claro
-			color5[1]=150;
-			color5[2]=255;
+			color5[0]=125;//color azul claro
+			color5[1]=125;
+			color5[2]=200;
 
 			color6[0]=100;//color rojo
 			color6[1]=50;
