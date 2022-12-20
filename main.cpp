@@ -491,7 +491,7 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, ch
 	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
 	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
 	jugador.yH=jugador.y+8*pixDim;
-	jugador.skin=2;
+	jugador.skin=3;
 	jugador.vida=4;
 
 
@@ -546,7 +546,7 @@ void lvl3_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, ch
 	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
 	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
 	jugador.yH=jugador.y+8*pixDim;
-	jugador.skin=2;
+	jugador.skin=3;
 	jugador.vida=4;
 
 
@@ -602,7 +602,7 @@ void lvl3_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b, ch
 	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
 	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
 	jugador.yH=jugador.y+8*pixDim;
-	jugador.skin=2;
+	jugador.skin=3;
 	jugador.vida=6;
 
 
