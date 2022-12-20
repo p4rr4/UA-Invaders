@@ -70,7 +70,6 @@ void lvl9(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
 // Bullet components
 void DefBala(int b, int type, int pixDim, int e, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador jugador);
 void movBalas(int nb, int windowY, DatosBalas bala[], DatosEnemigos enemigo[], DatosJugador jugador);
-void DefBala(int b, int type, int pixDim, int e, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador jugador);
 void dibBala(int b, DatosBalas bala[]);
 void DibTodasBalas(int nb, DatosBalas bala[]);
 
