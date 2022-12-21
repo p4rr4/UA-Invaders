@@ -555,7 +555,7 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	int x=20;//esquina inicial de los enemigos
 	int y=20;//esquina inicial de los enemigos
 	int sep=12;//separacion entre enemigos
-	const int F=8;//filas matriz enemigos
+	const int F=11;//filas matriz enemigos
 	const int C=10;//columnas matriz enemigos
 	int dist=15;//distancia de cada movimiento
 	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
@@ -590,14 +590,18 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
 
 	int enemigos31 [F][C]=
-	{{2,4,2,0,2,2,0,2,4,2},
-	{4,2,0,2,0,0,2,0,2,4},
-	{5,3,0,0,5,5,0,0,3,5},
-	{2,1,3,0,4,4,0,3,1,2},
-	{0,2,0,3,0,0,3,0,2,0},
-	{3,0,3,5,0,0,5,3,0,3},
-	{0,0,0,1,0,0,1,0,0,0},
-	{0,0,2,0,0,0,0,2,0,0}};
+	{{4,0,0,1,0,0,1,0,0,4},
+	{0,0,0,0,0,0,0,0,0,0},
+	{0,2,0,2,0,0,2,0,2,0},
+	{0,0,2,0,0,0,0,2,0,0},
+	{0,0,0,2,0,0,2,0,0,0},
+	{4,0,2,0,3,3,0,2,0,4},
+	{0,0,0,3,3,3,3,0,0,0},
+	{0,0,3,3,3,3,3,3,0,0},
+	{0,0,0,3,3,3,3,0,0,0},
+	{0,0,0,0,3,3,0,0,0,0},
+	{0,4,0,0,0,0,0,0,4,0}};
+
 	
 	win=countE(enemigos31,F,C,cantE);
 
