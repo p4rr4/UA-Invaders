@@ -205,3 +205,7 @@ void gfx_flush()
 	XFlush(gfx_display);
 }
 
+void gfx_close() {
+	XDestroyWindow(gfx_display, gfx_window);
+	XCloseDisplay(gfx_display);
+}
