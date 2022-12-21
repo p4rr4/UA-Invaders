@@ -3024,6 +3024,7 @@ void printLetter(){
 }
 void credits(char name[4],int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b,database data) {
 	char ans1;
+	ans1 = 'e';
 	do {
 		printLetter();
 		cout << "\n\n\t\t\t\t\t\t\u001b[34mAԃɾιáɳ Tҽɳԃҽɾσ Gαɾƈíα";
