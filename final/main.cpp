@@ -742,10 +742,12 @@ int lastE(int enemigos[][10],int f, int c){
 void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data, char &ans){
 	char res;
 	if (win==1)
-	{
+	{	
+		gfx_close();
 		victoryAnim(res,name,score,jugador,b);
 		saveScore(data,level,name,score,ans);
 	}else{
+		gfx_close();
 		gameOverAnim(res,name,score,jugador,cantE,b);
 		saveScore(data,level,name,score,ans);
 	}
