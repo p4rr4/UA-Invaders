@@ -56,15 +56,15 @@ void dibCorazon(int x, int y); // draws hearts (players' lifes)
 
 
 // Levels
-void lvl1_1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // P1
-void lvl1_2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Fast
-void lvl1_3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chess
-void lvl2_1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Meteor
-void lvl2_2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chaos
-void lvl2_3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl3_1(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl3_2(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
-void lvl3_3(DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl1_1(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // P1
+void lvl1_2(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Fast
+void lvl1_3(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chess
+void lvl2_1(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Meteor
+void lvl2_2(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input); // Chaos
+void lvl2_3(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3_1(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3_2(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
+void lvl3_3(int &score,DatosJugador &jugador, int &cantE, bool &win, int &b, char &input);
 
 
 // Bullet components
