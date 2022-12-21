@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <fstream>
 #include <cstring>
+
 using namespace std;
 
 struct database { //Struct for saving scores
@@ -30,16 +31,22 @@ struct DatosBalas{
 };
 
 struct DatosJugador{
-	int x;
-	int y;
+	int x;      //X de la nave
+	int y;      //Y de la nave
 	int yH;    //hitbox
-	int ancho;
-	int alto; 
+	int ancho;  //dimension de la nave
+	int alto;   //dimension de la nave
 	int altoh; //hitbox
-	int skin;
-	int vida;
+	int skin;   //aspecto de la nave
+	int vida;   //vidas de la nave
 };
 
+/*
+ANIMATION MODULES
+These modules are all for printing characters in the terminal, so there is no explanation for them.
+However, it is important to know that we use the ANSI colour codes for C++ to change the colour of the font.
+We also use usleep() to make the animation effect.
+*/
 void introAnim();
 void initialAnimation(char &answer);
 void mainMenu(char name[4],int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b,database data);
@@ -47,11 +54,12 @@ void menuJugar(char name[4],int &opt,DatosJugador &jugador, int &cantE, bool &wi
 void printLetter();
 void credits(char name[4],int &opt,DatosJugador &jugador, int &cantE, bool &win, int &b,database data);
 void instructions(char &ans, char name[4]);
-void clearbuffer();
 void victoryAnim(char ans,char name[4],int score,DatosJugador jugador, int b);
 void gameOverAnim(char ans,char name[4],int score,DatosJugador jugador,int cantE, int b);
-void saveScore(database data,int level, char name[4], int score, char &ans);
+void saveScore(database data,int level, char name[4], int score, char &ans); //This module uses the fstream library to save the scores to each text file
 void EPSanimation();
+
+void clearbuffer(); // Clears the keyboard buffer
 
 void DefEne(int x, int y, int ancho, int alto, int f, int c, int e, DatosEnemigos enemigo[]);
 
@@ -217,7 +225,7 @@ void lvl1_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos11,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 1.1");
+	gfx_open(windowX, windowY, "UA invaders");
 	animMatriz(score,jugador,enemigo11,bala11,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos11,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
 
@@ -278,7 +286,7 @@ void lvl1_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos12,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 1.2");
+	gfx_open(windowX, windowY, "UA invaders");
 	animMatriz(score, jugador,enemigo12,bala12,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos12,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
 
@@ -339,7 +347,7 @@ void lvl1_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos13,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 1.3");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo13,bala13,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos13,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -403,7 +411,7 @@ void lvl2_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos21,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 2.1");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score, jugador,enemigo21,bala21,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos21,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -466,7 +474,7 @@ void lvl2_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos22,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 2.2");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo22,bala22,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos22,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 
@@ -530,7 +538,7 @@ void lvl2_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos23,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 2.3");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo23,bala23,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos23,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 
@@ -593,7 +601,7 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos31,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 3.1");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo31,bala31,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos31,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -656,7 +664,7 @@ void lvl3_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos32,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 3.2");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo32,bala32,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos32,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -719,7 +727,7 @@ void lvl3_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos33,F,C,cantE);
 
-	gfx_open(windowX, windowY, "Nivel 3.3");
+	gfx_open(windowX, windowY, "UA invaders");
 
 	animMatriz(score,jugador,enemigo33,bala33,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos33,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -742,7 +750,7 @@ int lastE(int enemigos[][10],int f, int c){
 void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data, char &ans){
 	char res;
 	if (win==1)
-	{	
+	{
 		gfx_close();
 		victoryAnim(res,name,score,jugador,b);
 		saveScore(data,level,name,score,ans);
@@ -3544,6 +3552,9 @@ void instructions(char &ans, char name[4]) {
 }
 void gameOverAnim(char ans,char name[4],int score,DatosJugador jugador,int cantE, int b){
 	system("clear");
+	if (jugador.vida<0) {
+		jugador.vida = 0;
+	}
 	cout << "\n\n";
 	usleep(100000);
 	cout << "\t\t\t\t\t\u001b[31m██████   █████  ███    ███ ███████ "<< endl;
@@ -3576,7 +3587,7 @@ void gameOverAnim(char ans,char name[4],int score,DatosJugador jugador,int cantE
 	usleep(1000000);
 	cout << "\t\t\t\t\t\t\u001b[31m    Enemies left: "<< cantE << endl;
 	usleep(1000000);
-	cout << "\t\t\t\t\t\t\u001b[31m    Bullets used: "<< b << endl << endl;
+	cout << "\t\t\t\t\t\t\u001b[31m    Total bullets: "<< b << endl << endl;
 	usleep(1000000);
 	do {
 	cout << "\n\t\t\t\t\t\t\u001b[31m      Next(n): ";
@@ -3588,6 +3599,9 @@ void gameOverAnim(char ans,char name[4],int score,DatosJugador jugador,int cantE
 }
 void victoryAnim(char ans,char name[4],int score,DatosJugador jugador, int b) {
 	system("clear");
+	if (jugador.vida<0) {
+		jugador.vida = 0;
+	}
 	cout << "\n\n\n\n";
 
 	cout << "\t\t\t\t\u001b[33m██    ██  ██████  ██    ██     ██     ██ ██ ███    ██ ██ "<< endl;
@@ -3606,7 +3620,7 @@ void victoryAnim(char ans,char name[4],int score,DatosJugador jugador, int b) {
 	usleep(1000000);
 	cout << "\t\t\t\t\t\t\u001b[33m      Lifes left: "<< jugador.vida << endl;
 	usleep(1000000);
-	cout << "\t\t\t\t\t\t\u001b[33m      Bullets used: "<< b << endl;
+	cout << "\t\t\t\t\t\t\u001b[33m      Total bullets: "<< b << endl;
 	usleep(1000000);
 	do {
 	cout << "\n\t\t\t\t\t\t\u001b[33m      Next(n): ";
