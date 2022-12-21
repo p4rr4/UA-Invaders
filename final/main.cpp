@@ -217,7 +217,7 @@ void lvl1_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos11,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 1.1");
 	animMatriz(score,jugador,enemigo11,bala11,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos11,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
 
@@ -278,7 +278,7 @@ void lvl1_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos12,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 1.2");
 	animMatriz(score, jugador,enemigo12,bala12,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos12,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
 
@@ -339,7 +339,7 @@ void lvl1_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos13,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 1.3");
 
 	animMatriz(score,jugador,enemigo13,bala13,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos13,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -403,7 +403,7 @@ void lvl2_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos21,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 2.1");
 
 	animMatriz(score, jugador,enemigo21,bala21,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos21,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -466,7 +466,7 @@ void lvl2_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos22,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 2.2");
 
 	animMatriz(score,jugador,enemigo22,bala22,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos22,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 
@@ -530,7 +530,7 @@ void lvl2_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos23,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 2.3");
 
 	animMatriz(score,jugador,enemigo23,bala23,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos23,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 
@@ -593,7 +593,7 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos31,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 3.1");
 
 	animMatriz(score,jugador,enemigo31,bala31,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos31,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -656,7 +656,7 @@ void lvl3_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos32,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 3.2");
 
 	animMatriz(score,jugador,enemigo32,bala32,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos32,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
@@ -719,7 +719,7 @@ void lvl3_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	
 	win=countE(enemigos33,F,C,cantE);
 
-	gfx_open(windowX, windowY, "UA invaders");
+	gfx_open(windowX, windowY, "Nivel 3.3");
 
 	animMatriz(score,jugador,enemigo33,bala33,lastEne,dist,hitJ,ancho,alto,sep,t,xd,yd,x,windowX,windowY,cantE,velBalas,ticksBala,b,pixDim,enemigos33,balasEnemigas1,balasEnemigas4,k,ticks,lost,win,F,C);
 }
