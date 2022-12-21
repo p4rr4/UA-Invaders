@@ -22,23 +22,23 @@ struct DatosEnemigos{    //hitbox
 };
 
 struct DatosBalas{
-	int x;				//coordenada x
-	int y;				//coordenada y
+	int x;				//coordinate X
+	int y;				//coordinate Y
 	int ancho;			//hitbox x
 	int alto;			//hitbox y
-	int type;			//0 no hay bala, 1 para balas jugador y 2 para balas del enemigo
+	int type;			//0 no bullet, 1 for players' bullet and 2 for the bullets of the enemy
 	int color[3];		//color de la bala
 };
 
 struct DatosJugador{
-	int x;      //X de la nave
-	int y;      //Y de la nave
+	int x;      //X of the ship
+	int y;      //Y of the ship
 	int yH;    //hitbox
-	int ancho;  //dimension de la nave
-	int alto;   //dimension de la nave
+	int ancho;  //dimension of the ship
+	int alto;   //dimension of the ship
 	int altoh; //hitbox
-	int skin;   //aspecto de la nave
-	int vida;   //vidas de la nave
+	int skin;   //skin of the ship
+	int vida;   //life of the ship
 };
 
 /*
@@ -58,10 +58,8 @@ void victoryAnim(char ans,char name[4],int score,DatosJugador jugador, int b);
 void gameOverAnim(char ans,char name[4],int score,DatosJugador jugador,int cantE, int b);
 void saveScore(database data,int level, char name[4], int score, char &ans); //This module uses the fstream library to save the scores to each text file
 void EPSanimation();
-
 void clearbuffer(); // Clears the keyboard buffer
 
-void DefEne(int x, int y, int ancho, int alto, int f, int c, int e, DatosEnemigos enemigo[]);
 
 // Modules that draw things
 void DibEne1(int x, int y, int alto, int pixDim);  // draws enemy blue martian
@@ -72,7 +70,6 @@ void DibEne3_1(int x, int y, int alto, int pixDim); // draws second life version
 void dibExp(int x, int y, int alto, int pixDim); // draws the enemies' explosion
 void DibP(int x, int y,int alto, int pixDim, int &hitJ, DatosJugador jugador); // draws the player's ship
 void dibCorazon(int x, int y); // draws hearts (players' lifes)
-
 
 
 // Levels
@@ -94,26 +91,31 @@ void dibBala(int b, DatosBalas bala[]);
 void DibTodasBalas(int nb, DatosBalas bala[]);
 
 
-char DetInput(char input);
+char DetInput(char input); // Detects keys
 void accion(char input, int windowX, DatosJugador &jugador);
 
+void DefEne(int x, int y, int ancho, int alto, int f, int c, int e, DatosEnemigos enemigo[]);
+void resetEne(int ne, DatosEnemigos enemigo[], int f, int c);
 
+// Controls the user interface (borders and distribution)
 void interfaz(int wX,int wY, DatosJugador jugador);
-void matriz(int x0, int y0,int ancho, int alto, int sep,int enemigos[][10], int f, int c, int pixDim, DatosEnemigos enemigo[]);
 
 void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, DatosEnemigos enemigo[], DatosBalas bala[], DatosJugador &jugador, int &lastEne);
 bool GameOver(int f, int c, DatosEnemigos enemigo[], DatosJugador jugador);
 bool countE(int enemigos[][10],int f, int c, int &cant);
 
+
+// Modules that control the animation of the matrix, the movement and its operation
 void animDrch(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
 void animIzq(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
 void animMatriz(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,int f,int c);
+void matriz(int x0, int y0,int ancho, int alto, int sep,int enemigos[][10], int f, int c, int pixDim, DatosEnemigos enemigo[]);
 
+
+// Score and stats
 void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data, char &ans);
-
 int sumScore(int enemigos[][10], int f, int c, int &score);
 
-void resetEne(int ne, DatosEnemigos enemigo[], int f, int c);
 
 int main()
 {
@@ -175,19 +177,19 @@ void lvl1_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=200;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=4;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=10;//distancia de cada movimiento
-	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;//pixels' dimension
+	int windowX=1200;//X of the window
+	int windowY=900;//Y of the window
+	int ancho=19*pixDim;//of each enemy unique (don't touch)
+	int alto=13*pixDim;//of each enemy unique (don't touch)
+	int x=20;//initial position of enemies
+	int y=200;//initial position of enemies
+	int sep=12;//separation between enemies
+	const int F=4;//rows enemies' matrix
+	const int C=10;//columns enemies' matrix
+	int dist=10;//distance of each movement
+	int ticks=50;//quanitiy of ticks per movement of the enemy (don't touch)
+	int t=300000;//time
 	int ticksBala=75;
 	int balasEnemigas1=1000;
 	int balasEnemigas4=1000;
@@ -204,18 +206,18 @@ void lvl1_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;//initial position of the player
+	jugador.y=windowY-60-jugador.alto;//initial position of the player
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=1;
 	jugador.vida=3;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//number of movements of the animation
+	int xd=x;//X of drawing
+	int yd=y;//Y of drawing
+	int xP=(windowX-jugador.ancho)/2;//initial position of the player
+	int yP=windowY-20-jugador.alto;//intial position of the player
 
 	int enemigos11 [F][C]=
 	{{0,0,0,2,0,0,2,0,0,0},
@@ -234,19 +236,19 @@ void lvl1_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 	
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=5;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=10;//distancia de cada movimiento
-	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=5;
+	const int C=10;
+	int dist=10;
+	int ticks=50;
+	int t=300000;
 	int ticksBala=75;
 	int balasEnemigas1=1000;
 	int balasEnemigas4=1000;
@@ -263,18 +265,18 @@ void lvl1_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=1;
 	jugador.vida=3;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 
 	int enemigos12 [F][C]=
@@ -294,19 +296,19 @@ void lvl1_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 	
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=6;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=10;//distancia de cada movimiento
-	int ticks=50;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=6;
+	const int C=10;
+	int dist=10;
+	int ticks=50;
+	int t=300000;
 	int ticksBala=75;
 	int balasEnemigas1=1000;
 	int balasEnemigas4=1000;
@@ -323,18 +325,18 @@ void lvl1_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=1;
 	jugador.vida=3;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 
 	int enemigos13 [F][C]=
@@ -356,19 +358,19 @@ void lvl2_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 	
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=8;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=15;//distancia de cada movimiento
-	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=8;
+	const int C=10;
+	int dist=15;
+	int ticks=40;
+	int t=300000;
 	int ticksBala=50;
 	int balasEnemigas1=200;
 	int balasEnemigas4=1000;
@@ -385,18 +387,18 @@ void lvl2_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=2;
 	jugador.vida=4;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 
 	int enemigos21 [F][C]=
@@ -420,19 +422,19 @@ void lvl2_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 	
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=7;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=15;//distancia de cada movimiento
-	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=7;
+	const int C=10;
+	int dist=15;
+	int ticks=40;
+	int t=300000;
 	int ticksBala=50;
 	int balasEnemigas1=200;
 	int balasEnemigas4=1000;
@@ -449,18 +451,18 @@ void lvl2_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=2;
 	jugador.vida=4;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 
 	int enemigos22 [F][C]=
@@ -483,19 +485,19 @@ void lvl2_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 	
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=9;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=15;//distancia de cada movimiento
-	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=9;
+	const int C=10;
+	int dist=15;
+	int ticks=40;
+	int t=300000;
 	int ticksBala=75;
 	int balasEnemigas1=200;
 	int balasEnemigas4=400;
@@ -512,18 +514,18 @@ void lvl2_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=2;
 	jugador.vida=4;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 	int enemigos23 [F][C]=
 	{{3,0,0,2,0,0,2,0,0,3},
@@ -547,19 +549,19 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 	
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=11;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=15;//distancia de cada movimiento
-	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=11;
+	const int C=10;
+	int dist=15;
+	int ticks=40;
+	int t=300000;
 	int ticksBala=75;
 	int balasEnemigas1=100;
 	int balasEnemigas4=300;
@@ -576,18 +578,18 @@ void lvl3_1(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=3;
 	jugador.vida=4;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 	int enemigos31 [F][C]=
 	{{4,0,0,1,0,0,1,0,0,4},
@@ -613,19 +615,19 @@ void lvl3_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=9;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=15;//distancia de cada movimiento
-	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=9;
+	const int C=10;
+	int dist=15;
+	int ticks=40;
+	int t=300000;
 	int ticksBala=75;
 	int balasEnemigas1=100;
 	int balasEnemigas4=200;
@@ -642,18 +644,18 @@ void lvl3_2(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=3;
 	jugador.vida=4;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 	int enemigos32 [F][C]=
 	{{4,5,5,0,0,0,0,5,5,4},
@@ -676,19 +678,19 @@ void lvl3_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	score=0;
 	b=0;
 
-	int pixDim=4;//dimension de los píxeles
-	int windowX=1200;//X de la ventana
-	int windowY=900;//Y de la ventana
-	int ancho=19*pixDim;//de cada enemigo unico (no tocar)
-	int alto=13*pixDim;//de cada enemigo unico (no tocar)
-	int x=20;//esquina inicial de los enemigos
-	int y=20;//esquina inicial de los enemigos
-	int sep=12;//separacion entre enemigos
-	const int F=11;//filas matriz enemigos
-	const int C=10;//columnas matriz enemigos
-	int dist=15;//distancia de cada movimiento
-	int ticks=40;//cantidad de ticks por cada movimiento del enemigo(no tocar)
-	int t=300000;//tiempo
+	int pixDim=4;
+	int windowX=1200;
+	int windowY=900;
+	int ancho=19*pixDim;
+	int alto=13*pixDim;
+	int x=20;
+	int y=20;
+	int sep=12;
+	const int F=11;
+	const int C=10;
+	int dist=15;
+	int ticks=40;
+	int t=300000;
 	int ticksBala=75;
 	int balasEnemigas1=100;
 	int balasEnemigas4=200;
@@ -703,18 +705,18 @@ void lvl3_3(int &score, DatosJugador &jugador, int &cantE, bool &win, int &b){
 	jugador.ancho= 25*pixDim;
 	jugador.alto= 17*pixDim;
 	jugador.altoh = 10*pixDim;
-	jugador.x=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	jugador.y=windowY-60-jugador.alto;//posicion inicial del jugador
+	jugador.x=(windowX-jugador.ancho)/2;
+	jugador.y=windowY-60-jugador.alto;
 	jugador.yH=jugador.y+8*pixDim;
 	jugador.skin=3;
 	jugador.vida=6;
 
 
-	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;//número de movimientos de la animacion
-	int xd=x;//x de dibujado
-	int yd=y;//y de dibujado
-	int xP=(windowX-jugador.ancho)/2;//posicion inicial del jugador
-	int yP=windowY-20-jugador.alto;//posicion inicial del jugador
+	int k=(windowX-(C*ancho)-(C*sep)-x)/dist;
+	int xd=x;
+	int yd=y;
+	int xP=(windowX-jugador.ancho)/2;
+	int yP=windowY-20-jugador.alto;
 
 	int enemigos33 [F][C]=
 	{{0,5,0,5,0,0,5,0,5,0},
@@ -1215,7 +1217,7 @@ void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, Dato
 				}
 			}
 		}	
-		if (bala[b].type==2) //bala enemigo 1 resta 1 de vida
+		if (bala[b].type==2) //bullet of enemy 1 = -1 life
 		{
 			if (jugador.yH + jugador.altoh > bala[b].y && jugador.x + jugador.ancho > bala[b].x && jugador.yH < bala[b].y + bala[b].alto && jugador.x < bala[b].x + bala[b].ancho)
 			{
@@ -1224,7 +1226,7 @@ void killing(int &score,int nb, int enemigos[][10],int f, int c, int &hitJ, Dato
 				hitJ=30;//dura menos tiempo el efecto de daño(contador)
 			}
 		}
-		if (bala[b].type==3) ////bala enemigo 4 resta 2 de vida
+		if (bala[b].type==3) ////bullet of enemy 2 = -2 lifes
 		{
 			if (jugador.yH + jugador.altoh > bala[b].y && jugador.x + jugador.ancho > bala[b].x && jugador.yH < bala[b].y + bala[b].alto && jugador.x < bala[b].x + bala[b].ancho)
 			{
