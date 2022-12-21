@@ -50,7 +50,7 @@ void instructions(char &ans, char name[4]);
 void clearbuffer();
 void victoryAnim(char ans,char name[4],int score,DatosJugador jugador, int b);
 void gameOverAnim(char ans,char name[4],int score,DatosJugador jugador,int cantE, int b);
-void saveScore(database data,int level, char name[4], int score);
+void saveScore(database data,int level, char name[4], int score, char &ans);
 void EPSanimation();
 
 void DefEne(int x, int y, int ancho, int alto, int f, int c, int e, DatosEnemigos enemigo[]);
@@ -101,7 +101,7 @@ void animDrch(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBala
 void animIzq(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
 void animMatriz(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c);
 
-void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data);
+void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data, char &ans);
 
 int sumScore(int enemigos[][10], int f, int c, int &score);
 
@@ -123,7 +123,6 @@ int main()
 	cout << "\n\n\t\t\t\t\t\t\u001b[34mEɳƚҽɾ ყσυɾ ɳαɱҽ (3 ʅҽƚƚҽɾʂ): ";
 	cin >> name;
 
-	mainMenu(name,option,jugador,cantE,win,b,input,data);
 	mainMenu(name,option,jugador,cantE,win,b,input,data);
 	
 	return 0;
@@ -668,15 +667,15 @@ int lastE(int enemigos[][10],int f, int c){
 
 	return ene;
 }
-void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data){
-	char ans;
+void stats(int score,char name[4],DatosJugador jugador,int cantE, bool win, int b, int level,database data, char &ans){
+	char res;
 	if (win==1)
 	{
-		victoryAnim(ans,name,score,jugador,b);
-		saveScore(data,level,name,score);
+		victoryAnim(res,name,score,jugador,b);
+		saveScore(data,level,name,score,ans);
 	}else{
-		gameOverAnim(ans,name,score,jugador,cantE,b);
-		saveScore(data,level,name,score);
+		gameOverAnim(res,name,score,jugador,cantE,b);
+		saveScore(data,level,name,score,ans);
 	}
 }
 void animMatriz(int &score,DatosJugador &jugador,DatosEnemigos enemigo[],DatosBalas bala[],int lastEne,int dist,int &hitJ,int ancho, int alto, int sep, int t,int &xd, int &yd,int &x,int windowX,int windowY,int &cantE,int velBalas,int ticksBala,int &b,int pixDim,int enemigos[][10],int balasEnemigas1,int balasEnemigas4,int k,int ticks,int &lost,bool &win,char &input,int f,int c){
@@ -2963,6 +2962,8 @@ void menuJugar(char name[4],int &opt, DatosJugador &jugador, int &cantE, bool &w
 	int score=0;
 	opt = 1;
 	int level=0;
+	char ans;
+	do{
 	do {
 		printLetter();
 		cout << "\n\n\t\t\t\t\t\t\u001b[34m1. Pԋαʂҽ 1";
@@ -2995,20 +2996,20 @@ void menuJugar(char name[4],int &opt, DatosJugador &jugador, int &cantE, bool &w
 				level = 11;
 				introAnim();
 				lvl1_1(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 			break;
 			case 2:
 				level = 12;
 				introAnim();
 				lvl1_2(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 3:
 				level = 13;
 				introAnim();
 				lvl1_3(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 4:
@@ -3038,21 +3039,21 @@ void menuJugar(char name[4],int &opt, DatosJugador &jugador, int &cantE, bool &w
 				level = 21;
 				introAnim();
 				lvl2_1(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 2:
 				level = 22;
 				introAnim();
 				lvl2_2(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 3:
 				level = 23;
 				introAnim();
 				lvl2_3(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 4:
@@ -3081,21 +3082,21 @@ void menuJugar(char name[4],int &opt, DatosJugador &jugador, int &cantE, bool &w
 				level = 31;
 				introAnim();
 				lvl3_1(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 2:
 				level = 32;
 				introAnim();
 				lvl3_2(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 3:
 				level = 33;
 				introAnim();
 				lvl3_3(score,jugador,cantE,win,b,input);
-				stats(score,name,jugador,cantE,win,b,level,data);
+				stats(score,name,jugador,cantE,win,b,level,data,ans);
 				
 			break;
 			case 4:
@@ -3111,6 +3112,7 @@ void menuJugar(char name[4],int &opt, DatosJugador &jugador, int &cantE, bool &w
 		default:
 		break;
 	}
+	}while(ans=='y');
 }
 void introAnim() {
 	system("clear");
@@ -3539,12 +3541,11 @@ void victoryAnim(char ans,char name[4],int score,DatosJugador jugador, int b) {
 	
 
 }
-void saveScore(database data,int level, char name[4], int score){
+void saveScore(database data,int level, char name[4], int score,char &ans){
 	char arch[30];
 	char ch;
 	int count=0;
 	int i;
-	char ans;
 	switch (level){
 	case 11:
 		strcpy(arch, "level1_1.txt");
